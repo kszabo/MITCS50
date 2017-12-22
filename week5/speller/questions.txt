@@ -1,0 +1,24 @@
+0.  an artificial long word said to mean a lung disease caused by inhaling very fine ash and sand dust.
+1.  getrusage: returns resource usage measures (for its first argument)
+        self: sum of resources by all threads in the process
+2.  16
+3.  why pass before/after by reference and not by value? Creating the copies of the values also takes time, so we wan't to avoid calculating with them.
+4.  main:
+        read in the file character by caracter.
+            If current character is alphabetic or a single quote, then append it to the word, move the index,
+                    and if word is longer than 45 character, just ignore the rest of word
+            if numeric, then just ignore the rest of the word; start a new word (set index = 0);
+            if current character is neither alphabetic, alphanumeric, or single quote, then assume it is end of the word:
+               append the NULL character.
+               increment word counter
+               check in dictionary and measure
+               if not in dictionary, print on screen and increment counter
+               reset index so that next word can be checked
+        see if there was any error reading in the text file, and if so, unload the dictionary
+        close the text file
+        measure dictionary size and measure the time it takes to check size
+        unload dictionary and measure the time it takes to unload
+        report statistics
+5.  fscanf with %s format may not work if there is a word longer than 45 characters long. In that case, the next "word"
+        will be the starting with the characters above the 45th character, skewing the total word count.
+6.  constants so that we can't modify them even by mistake

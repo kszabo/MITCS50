@@ -1,0 +1,4 @@
+0. 3 to 9 tiles, inclusive
+1. a two dimensional array
+2. void greet(void);
+3. init, draw, move, won

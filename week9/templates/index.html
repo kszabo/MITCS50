@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Form Title
+{% endblock %}
+
+{% block body %}
+<h1>Register</h1>
+<form action="{{ url_for('register') }}" method="post">
+    Name: <input name="name" type="text"/>
+    <br/>
+    Dorm:
+    <select name="dorm">
+        <option value=""></otion>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="C">C</option>
+    </select>
+    <br/>
+    <input type="submit" value="Register"/>
+</form>
+{% endblock %}

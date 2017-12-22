@@ -1,0 +1,17 @@
+1.  stdint.h standardizes types for code portability.
+    Depending on systems and compilers, a type may not be the same across all,
+    but with stdint.h they will be defined clearly
+2.  The point of using uint8_t, int32_t, etc. ensures that there are no mistakes made in what type "int" should mean across platforms.
+3.  BYTE = 1 byte, DWORD = 4 bytes, LONG = 4 bytes, WORD = 2 bytes
+4.  first two bytes must be "BM" for type of BMP file.
+5.  bfSize is the size of the bitmap file; biSize is the size of the structure(?) (the type structure? Can it be not 40?)
+    per documentation, it is used to locate the color table. But don't we know!? that it is 40, just by the structure itself?
+6.  Negative biHeight means that the bitmap picture is stored top down (origin is upper left corner)
+7.  color depth?
+8.  fopen may return NULL if no file found, or there is not enough disk space to write,
+    or the user doesn't have permission to read/write a file, or other problems
+9.  1 in fread means to read one element of size "size" (in fread attribute array).
+    So in our case, read just one BITMAPINFOHEADER or BITMAPFILEHEADER
+10. line 65 copy.c: padding will be 0
+11. fseek: sets the file position of the stream to the given offset
+12. SEEK_CUR in fseek is a constrant; current position of the file pointer

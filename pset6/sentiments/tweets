@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import sys
+import os
+
+from helpers import get_user_timeline
+from analyzer import Analyzer
+from termcolor import colored
+
+
+def main():
+    if len(sys.argv) != 2:
+        sys.exit("Usage: ./tweets @screen_name")
+
+    #initialize Analyzer
+    # absolute paths to lists
+    positives = os.path.join(sys.path[0], "positive-words.txt")
+    negatives = os.path.join(sys.path[0], "negative-words.txt")
+    myAnalyzer = Analyzer(positives, negatives)
+
+    allTweets = get_user_timeline(sys.argv[1], count=50)
+
+    for t in allTweets:
+        # first analyze one tweet at a time
+        # then print colored tweet
+        sent = myAnalyzer.analyze(t)
+        if sent > 0:
+            print(colored("{} {}".format(sent, t), "green"))
+        elif sent < 0:
+            print(colored("{} {}".format(sent, t), "red"))
+        else:
+            print(colored("{} {}".format(sent, t), "yellow"))
+
+
+if __name__ == "__main__":
+    main()

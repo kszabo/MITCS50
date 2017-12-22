@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('index') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <table>
+                    <thead>
+                        <th>Action</th>
+                        <th>Symbol</hd>
+                        {% if history == "no": %}
+                            <th>Name</th>
+                        {% endif %}
+                        <th>Shares</th>
+                        <th>Price</th>
+                        {% if history == "no": %}
+                            <th>Total</th>
+                        {% endif %}
+                        {% if history == "yes": %}
+                            <th>Date</th>
+                        {% endif %}
+                    </thead>
+                    <tbody>
+                        {% for purchase in purchases %}
+                        <tr>
+                            {% if history == "yes": %}
+                                <td>{% if purchase.numshares < 0: %} Sold {% else: %} Bought {% endif %}</td>
+                            {% else: %}
+                                <td><input type="radio" name="action_{{ purchase.symbol }}" value="keep" checked>&nbsp;No action&nbsp;
+                                    <input type="radio" name="action_{{ purchase.symbol }}" value="buy">&nbsp;Buy&nbsp;
+                                    <input type="radio" name="action_{{ purchase.symbol }}" value="sell">&nbsp;Sell</td>
+                                <td><input type="text" name="numtrade_{{ purchase.symbol }}" style="width: 150px;" placeholder="0"/></td>
+                            {% endif %}
+                            <td>{{ purchase.symbol }}</td>
+                            {% if history == "no": %}
+                                <td>{{ purchase.name }}</td>
+                            {% endif %}
+                            <td>{{ purchase.numshares }}</td>
+                            <td>{{ purchase.price }}</td>
+                            {% if history == "no": %}
+                                <td>{{ purchase.total }}</td>
+                            {% endif %}
+                            {% if history == "yes": %}
+                                <td>{{ purchase.purchdate }}</td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% if history == "no": %}
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Trade</button>
+            </div>
+            {% endif %}
+        </fieldset>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('sell') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <table>
+                    <thead>
+                        <th>Action</th>
+                        <th># of shares to sell</th>
+                        <th>Symbol</hd>
+                        <th>Shares available</th>
+                    </thead>
+                    <tbody>
+                        {% for purchase in purchases %}
+                        <tr>
+                            <td><input type="checkbox" name="{{ purchase.symbol }}"/></td>
+                            <td><input type="text" name="sell_{{ purchase.symbol }}" placeholder="0"/></td>
+                            <td>{{ purchase.symbol }}</td>
+                            <td>{{ purchase.numshares }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Sell</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}
